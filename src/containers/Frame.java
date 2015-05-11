@@ -1,6 +1,7 @@
 package containers;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,20 +10,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.BrowserPreferences;
-
 import misc.Clock;
-
 import components.MyLabel;
 import components.MyPanel;
 import components.MyTransparentButton;
@@ -65,7 +59,7 @@ public class Frame extends JFrame {
 	private MyLabel labelBattery = new MyLabel(new ImageIcon(
 			"SmartPhoneImages/battery.png"));
 	private final MyLabel labelClock = new MyLabel("");
-	private final MyLabel labelBrand = new MyLabel("HTC");
+	private final MyLabel labelBrand = new MyLabel("Samsung");
 
 	//instance de la classe clock
 	private Clock clock = new Clock(labelClock);
@@ -94,7 +88,8 @@ public class Frame extends JFrame {
 		// ajout et reglage des Jcomponents dans le southPanel
 		panelSouth.setOpaque(false);
 		panelSouth.add(buttonHome);
-		panelCard = new MyPanel(this,25,50);
+		panelCard = new MyPanel(this,50,69);
+		panelCard.setLayout(new BorderLayout());
 
 		// reglage horloge
 		setClock();
@@ -108,34 +103,33 @@ public class Frame extends JFrame {
 		panelBrand.setOpaque(false);
 		// set mainPanel (background et position)
 
-		panelCard.setBackground(new Color(30, 34, 45));
+		panelCard.setBackground(new Color(50, 54, 85));
 		panelCard.setOpaque(true);
 		// ajout dans le content pane
-		getContentPane().add(BorderLayout.CENTER, MyPanel.createBox(panelCard));
+		getContentPane().add(BorderLayout.CENTER, panelCard.getBox());
 		getContentPane().add(BorderLayout.SOUTH, panelSouth);
 		getContentPane().add(BorderLayout.NORTH, panelBrand);
 		// set visible avant de choper longeur largeur des panel -> sinon null
 		setVisible(true);
 
 		//instanciation des différents Panels
-		panelHome = new PanelHome(panelCard, 50, 75);
-		panelInternet = new PanelBrowserApp(panelCard, 0, 0);
-		panelContactList = new PanelContacts(panelCard, 50, 75);
-		panelContact  = new PanelContactList(panelCard,50,75);
-		panelFacebook = new PanelBrowserApp(panelCard,0,0);
-		panelTwitter = new PanelBrowserApp(panelCard,0,0);
-		panelWiki = new PanelBrowserApp(panelCard,0,0);
-		panelGmail = new PanelBrowserApp(panelCard,0,0);
-		panelRadio = new PanelBrowserApp(panelCard,0,0);
-		panelMeteo = new PanelBrowserApp(panelCard,0,0);	
-		panelCard.setLayout(new BorderLayout());
+		panelHome = new PanelHome(panelCard.getBox(), 25, 100);
+		panelInternet = new PanelBrowserApp(panelCard.getBox(), 0, 0);
+		panelContactList = new PanelContacts(panelCard.getBox(), 125, 100);
+		panelContact  = new PanelContactList(panelCard.getBox(), 125, 100);
+		panelFacebook = new PanelBrowserApp(panelCard.getBox(), 0, 0);
+		panelTwitter = new PanelBrowserApp(panelCard.getBox(), 0, 0);
+		panelWiki = new PanelBrowserApp(panelCard.getBox(), 0, 0);
+		panelGmail = new PanelBrowserApp(panelCard.getBox(), 0, 0);
+		panelRadio = new PanelBrowserApp(panelCard.getBox(), 0, 0);
+		panelMeteo = new PanelBrowserApp(panelCard.getBox(), 0, 0);
 
 		//instanctiation des box via la méthode createBox
 		
 		//ajout des Components dans les Panels correspondants
 		//set invisible pour les panel contact et contacts		
-		panelCard.add(BorderLayout.CENTER, panelHome.getBox());
-		panelCard.add(BorderLayout.NORTH, panelNorth);
+		panelCard.add(panelHome.getBox(),BorderLayout.CENTER);
+		panelCard.add(panelNorth,BorderLayout.PAGE_START);
 		//reglage des listener
 		EcouteurBouton ecouteurBouton = new EcouteurBouton();
 		panelHome.getButtonContact().addActionListener(ecouteurBouton);
@@ -288,9 +282,7 @@ public class Frame extends JFrame {
 
 			if (e.getActionCommand().equals("ajoutContact")) {
 				panelNorth.setVisible(true);
-				panelContact.getBox().setVisible(true);
-				panelCard.remove(panelContactList.getBox());
-			
+				panelContact.getBox().setVisible(true);			
 				panelCard.add(panelContact.getBox());
 				panelHome.getBox().setVisible(false);
 				panelContactList.getBox().setVisible(false);
@@ -308,7 +300,6 @@ public class Frame extends JFrame {
 				panelRadio.getBox().setVisible(true);
 				panelCard.add(panelRadio.getBox());
 				panelHome.getBox().setVisible(false);
-
 				panelRadio.LoadUrl("www.internet-radio.com");
 			}
 			
@@ -317,7 +308,6 @@ public class Frame extends JFrame {
 				panelMeteo.getBox().setVisible(true);
 				panelCard.add(panelMeteo.getBox());
 				panelHome.getBox().setVisible(false);
-
 				panelMeteo.LoadUrl("http://www.meteosuisse.admin.ch/home.html?tab=overview");
 			}
 		}

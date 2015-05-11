@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -57,7 +58,7 @@ public class PanelContactList extends MyPanel {
 	 * @param marginW
 	 * @param marginH
 	 */
-	public PanelContactList(MyPanel myPanel, int marginW, int marginH) {
+	public PanelContactList(Box myPanel, int marginW, int marginH) {
 		super(myPanel, marginW, marginH);
 		setLayout(new BorderLayout());
 		panelCentre1.setOpaque(false);

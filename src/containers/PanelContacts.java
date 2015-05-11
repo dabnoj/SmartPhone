@@ -7,7 +7,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -33,7 +35,7 @@ public class PanelContacts extends MyPanel {
 	private ArrayList <Contact> listContact = new ArrayList<Contact>();
 	private MyTransparentButton bajoutContacts= new MyTransparentButton("+");
 
-	public PanelContacts(MyPanel mypanel,int marginW,int marginH){
+	public PanelContacts(Box mypanel,int marginW,int marginH){
 		super(mypanel,marginW,marginH);
 
 		setLayout(new BorderLayout());

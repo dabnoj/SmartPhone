@@ -20,7 +20,7 @@ public class MyPanel extends JPanel {
 	 * @uml.property  name="myPanel"
 	 * @uml.associationEnd  
 	 */
-	private MyPanel myPanel;
+	private Box myPanel;
 	private int componentW;
 	private int componentH;
 	private int marginW;
@@ -28,7 +28,7 @@ public class MyPanel extends JPanel {
 	private Box box;
 
 
-	public MyPanel(MyPanel myPanel, int marginW, int marginH){
+	public MyPanel(Box myPanel, int marginW, int marginH){
 		box = createBox(this);
 		this.myPanel = myPanel;
 		this.marginH = marginH;
@@ -42,6 +42,7 @@ public class MyPanel extends JPanel {
 
 	public MyPanel(JFrame frame, int marginW, int marginH){
 		this.frame = frame;
+		box = createBox(this);
 		this.marginH = marginH;
 		this.marginW = marginW;
 		this.componentW = frame.getWidth();

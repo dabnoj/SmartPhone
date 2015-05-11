@@ -2,6 +2,8 @@ package containers;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -64,7 +66,7 @@ public class PanelHome extends MyPanel {
 
 	private JPanel panelCenter = new JPanel(new GridLayout(5, 3));
 
-	public PanelHome(MyPanel panel, int marginW, int marginH) {
+	public PanelHome(Box panel, int marginW, int marginH) {
 		super(panel, marginW, marginH);
 
 		// premiere ligne
